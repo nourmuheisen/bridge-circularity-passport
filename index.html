@@ -3,501 +3,209 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f3f1e9">
-  <meta name="description" content="An interactive portfolio concept on textile product passports, global value chains and circular economy policy, informed by Circle Economy research.">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>When clothing travels, does responsibility travel too? — Textile value-chain case</title>
+  <meta name="description" content="A bridge data concept showing how asset, product and reuse information can support circular infrastructure decisions.">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <title>Circular Infrastructure Decisions | Van Brienenoordbrug</title>
   <style>
-    :root {
-      --paper: #f3f1e9;
-      --paper-bright: #fbfaf6;
-      --ink: #202924;
-      --muted: #65716a;
-      --line: #d3d7cc;
-      --green: #335f4b;
-      --green-light: #dce8dd;
-      --orange: #bc633d;
-      --orange-light: #f1e1d5;
-      --blue: #6b8790;
-      --serif: Georgia, "Times New Roman", serif;
-      --sans: "Avenir Next", Avenir, "Segoe UI", sans-serif;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
-    a { color: inherit; }
-    button { font: inherit; }
-    .page { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
-    .topline { display: flex; justify-content: space-between; align-items: center; padding: 23px 0 20px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
-    .brand { display: flex; gap: 10px; align-items: center; color: var(--ink); font-weight: 700; letter-spacing: .08em; }
-    .mark { display: inline-grid; place-items: center; width: 23px; height: 23px; border: 1px solid var(--green); border-radius: 50%; color: var(--green); font-family: var(--serif); font-size: 16px; line-height: 1; }
-    .topline a { text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
-    .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: end; padding: 69px 0 54px; }
-    .eyebrow, .section-kicker { color: var(--green); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-    h1 { max-width: 680px; margin: 18px 0 18px; font: 400 clamp(48px, 7vw, 82px)/.99 var(--serif); letter-spacing: -.045em; }
-    .hero-copy { max-width: 490px; margin: 0 0 5px; color: #4e5c54; font-size: 16px; line-height: 1.7; }
-    .hero-note { display: inline-flex; align-items: center; gap: 9px; margin-top: 23px; color: var(--muted); font-size: 12px; }
-    .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
-    .object-card { position: relative; padding: 28px; min-height: 260px; border: 1px solid var(--line); background: var(--paper-bright); }
-    .object-card::before { position: absolute; top: 0; left: 0; width: 5px; height: 100%; content: ""; background: var(--green); }
-    .object-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-left: 8px; }
-    .object-heading strong { font: 400 21px var(--serif); }
-    .object-heading span { color: var(--muted); font-size: 10px; letter-spacing: .11em; text-transform: uppercase; }
-    .panel-figure { display: grid; grid-template-columns: minmax(0,1fr) 155px; gap: 20px; align-items: center; margin-top: 20px; }
-    .passport-figure { display: grid; grid-template-columns: 145px 1fr; gap: 18px; align-items: center; margin-top: 20px; }
-    .shirt-art { display: grid; place-items: center; height: 135px; background: #e7ece2; }
-    .shirt-art svg { width: 95px; height: 110px; }
-    .passport-fields { display: grid; gap: 9px; color: var(--muted); font-size: 11px; line-height: 1.35; }
-    .passport-field { padding-bottom: 7px; border-bottom: 1px solid var(--line); }
-    .passport-field strong { display: block; color: var(--ink); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
-    .fit-section { padding: 55px 0 58px; border-top: 1px solid var(--line); }
-    .fit-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; margin-top: 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .fit-card { padding: 20px 23px 22px 0; }
-    .fit-card + .fit-card { padding-left: 23px; border-left: 1px solid var(--line); }
-    .fit-card h3 { margin: 0 0 8px; font: 400 21px var(--serif); }
-    .fit-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
-    .fit-card a { color: var(--green); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    .panel-drawing { height: 148px; display: flex; align-items: center; justify-content: center; position: relative; }
-    .panel-stack { width: 148px; height: 122px; position: relative; transform: skewY(-8deg) rotate(-2deg); }
-    .layer { position: absolute; top: 0; left: 0; width: 133px; height: 105px; border: 1px solid rgba(32,41,36,.35); }
-    .layer-back { left: 14px; top: 12px; background: #c6a579; box-shadow: 6px 6px 0 #a98a62; }
-    .layer-core { left: 7px; top: 6px; background: repeating-linear-gradient(0deg,#d6c19d 0 9px,#c5ad82 9px 12px); }
-    .layer-front { background: #8fa48b; width: 133px; height: 105px; }
-    .layer-front::after { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(255,255,255,.5); }
-    .figure-labels { display: grid; gap: 10px; color: var(--muted); font-size: 11px; line-height: 1.35; }
-    .figure-label { display: flex; gap: 8px; align-items: flex-start; }
-    .swatch { width: 9px; height: 9px; margin-top: 2px; flex: 0 0 auto; background: #8fa48b; }
-    .swatch.core { background: #c5ad82; }
-    .object-foot { display: flex; justify-content: space-between; margin: 7px 0 0 8px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; letter-spacing: .03em; }
-    .evidence { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .evidence-item { padding: 20px 22px 19px 0; }
-    .evidence-item + .evidence-item { padding-left: 22px; border-left: 1px solid var(--line); }
-    .evidence-value { display: block; font: 400 27px var(--serif); }
-    .evidence-label { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.4; }
-    .evidence-source { color: var(--green); font-weight: 700; }
-    .journey { padding: 71px 0 70px; }
-    .section-head { display: flex; justify-content: space-between; gap: 25px; align-items: end; margin-bottom: 24px; }
-    h2 { margin: 9px 0 0; font: 400 clamp(30px, 4vw, 43px)/1.08 var(--serif); letter-spacing: -.025em; }
-    .section-intro { max-width: 425px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .journey-shell { border: 1px solid var(--line); background: var(--paper-bright); }
-    .path-heading { padding: 28px 24px 0; text-align: center; }
-    .path-heading h3 { margin: 9px 0 0; font: 400 29px/1.1 var(--serif); }
-    .path-scene { display: grid; grid-template-columns: minmax(0,1fr) 310px minmax(0,1fr); gap: 22px; align-items: center; padding: 14px 36px 25px; }
-    .path-side { padding: 16px 18px; border-top: 2px solid var(--green); background: #eef2eb; }
-    .path-side.value-side { border-top-color: var(--orange); background: #f6eee8; }
-    .path-side small, .path-enabler small { display: block; margin-bottom: 7px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .path-side p, .path-enabler p { margin: 0; font-size: 12px; line-height: 1.6; }
-    .path-garment { position: relative; z-index: 0; display: grid; min-height: 335px; place-items: center; align-content: center; gap: 4px; }
-    .path-garment::before { position: absolute; z-index: -2; width: 255px; height: 255px; border: 1px solid #dfe5da; border-radius: 50%; background: radial-gradient(circle, #fff 0%, #edf1e9 68%, rgba(237,241,233,0) 69%); content: ""; }
-    .path-garment::after { position: absolute; z-index: -1; bottom: 24px; width: 180px; height: 34px; border-radius: 50%; background: linear-gradient(90deg, rgba(51,95,75,.08), rgba(51,95,75,.2), rgba(51,95,75,.08)); content: ""; transform: perspective(220px) rotateX(62deg); }
-    .path-shirt { width: 218px; height: 254px; padding: 8px; overflow: visible; filter: drop-shadow(5px 13px 8px rgba(32,41,36,.2)); transform: perspective(900px) rotateY(-12deg) rotateX(1deg); transform-origin: 50% 58%; transition: transform .55s cubic-bezier(.2,.75,.25,1), filter .4s ease; }
-    .path-shirt[data-stage="1"] { transform: perspective(900px) rotateY(-3deg) rotateX(3deg) translateY(2px); }
-    .path-shirt[data-stage="2"] { transform: perspective(900px) rotateY(8deg) rotateX(-1deg) translateY(-1px); }
-    .path-shirt[data-stage="3"] { transform: perspective(900px) rotateY(16deg) rotateX(2deg) translateY(-3px); }
-    .path-shirt[data-stage="4"] { transform: perspective(900px) rotateY(-9deg) rotateX(7deg) scale(.91) translateY(4px); }
-    .path-shirt[data-stage="5"] { transform: perspective(900px) rotateY(22deg) rotateX(4deg) scale(.7) translateY(12px); filter: drop-shadow(2px 10px 6px rgba(32,41,36,.12)); }
-    .path-shirt .shirt-body { fill: url(#shirtFabric); transform-origin: 60px 70px; transition: fill .35s ease, opacity .4s ease, transform .4s ease; }
-    .path-shirt .shirt-fold { opacity: .48; transition: opacity .3s ease; }
-    .path-shirt .wear-marks, .path-shirt .repair-patch, .path-shirt .repair-stitches, .path-shirt .reuse-tag, .path-shirt .sorting-overlay, .path-shirt .fiber-bundle { opacity: 0; transition: opacity .3s ease, transform .4s ease; }
-    .path-shirt[data-stage="1"] .wear-marks, .path-shirt[data-stage="2"] .wear-marks, .path-shirt[data-stage="3"] .wear-marks, .path-shirt[data-stage="4"] .wear-marks { opacity: 1; }
-    .path-shirt[data-stage="2"] .repair-patch, .path-shirt[data-stage="2"] .repair-stitches, .path-shirt[data-stage="3"] .repair-patch, .path-shirt[data-stage="3"] .repair-stitches { opacity: 1; }
-    .path-shirt[data-stage="3"] .reuse-tag { opacity: 1; transform: translateY(-2px); }
-    .path-shirt[data-stage="4"] .shirt-body { fill: #b4b9aa; transform: rotate(4deg) scale(.9); }
-    .path-shirt[data-stage="4"] .sorting-overlay { opacity: 1; }
-    .path-shirt[data-stage="5"] .shirt-body { fill: #c8cec2; opacity: .12; transform: translate(-18px, 7px) scale(.62); }
-    .path-shirt[data-stage="5"] .shirt-fold { opacity: 0; }
-    .path-shirt[data-stage="5"] .wear-marks, .path-shirt[data-stage="5"] .repair-patch, .path-shirt[data-stage="5"] .repair-stitches, .path-shirt[data-stage="5"] .reuse-tag, .path-shirt[data-stage="5"] .sorting-overlay { opacity: 0; }
-    .path-shirt[data-stage="5"] .fiber-bundle { opacity: 1; transform: translate(4px, -3px); }
-    .path-garment-label { position: absolute; bottom: 1px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper-bright); color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
-    .path-description-bar { display: flex; justify-content: space-between; gap: 22px; align-items: center; padding: 12px 34px 0; color: #536057; font-size: 12px; line-height: 1.55; }
-    .path-description-bar strong { font-weight: 500; }
-    .path-description-bar span { flex: 0 0 auto; color: var(--muted); font-size: 11px; }
-    .path-controls { padding: 18px 34px 17px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #f8f7f1; }
-    .path-control-head { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; margin-bottom: 13px; color: var(--muted); font-size: 11px; }
-    .path-control-head strong { color: var(--ink); font-size: 12px; }
-    .path-range { width: 100%; margin: 0; accent-color: var(--green); cursor: ew-resize; }
-    .path-labels { display: grid; grid-template-columns: repeat(6,1fr); gap: 8px; margin-top: 8px; color: var(--muted); font-size: 9px; }
-    .path-labels span { text-align: center; }
-    .path-labels span:first-child { text-align: left; }
-    .path-labels span:last-child { text-align: right; }
-    .path-enabler { padding: 14px 34px; background: #eef2eb; }
-    .path-caveat { margin: 0; padding: 13px 34px 16px; color: var(--muted); font-size: 10px; line-height: 1.5; }
-    .stage-tag { display: inline-flex; align-items: center; gap: 7px; color: var(--green); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; font-weight: 700; }
-    .stress-test { padding: 58px 0 62px; border-top: 1px solid var(--line); }
-    .stress-shell { display: grid; grid-template-columns: 245px 1fr; margin-top: 25px; border: 1px solid var(--line); background: var(--paper-bright); }
-    .actor-picker { padding: 14px; border-right: 1px solid var(--line); }
-    .actor-choice { width: 100%; display: block; padding: 13px 12px; border: 0; border-bottom: 1px solid #e6e7df; background: transparent; color: var(--muted); text-align: left; cursor: pointer; font-size: 12px; }
-    .actor-choice:last-child { border-bottom: 0; }
-    .actor-choice:hover { background: #f1f3ec; }
-    .actor-choice[aria-pressed="true"] { background: var(--green-light); color: var(--ink); font-weight: 700; }
-    .stress-content { padding: 28px 32px 30px; }
-    .stress-content h3 { margin: 10px 0 8px; font: 400 27px/1.15 var(--serif); }
-    .stress-content > p { max-width: 660px; margin: 0; color: #536057; font-size: 13px; line-height: 1.65; }
-    .stress-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 20px; }
-    .stress-card { padding: 13px 14px; background: #eef2eb; }
-    .stress-card:last-child { background: #f6eee8; }
-    .stress-card small { display: block; margin-bottom: 6px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .stress-card p { margin: 0; font-size: 12px; line-height: 1.55; }
-    .stress-note { margin-top: 14px !important; color: var(--muted) !important; font-size: 10px !important; }
-    .insight { display: grid; grid-template-columns: .8fr 1.2fr; gap: 54px; padding: 40px; background: var(--green); color: #f4f2e9; }
-    .insight .section-kicker { color: #c8d5c3; }
-    .insight h2 { max-width: 350px; }
-    .insight-copy { align-self: center; max-width: 610px; color: #e2e7df; font-size: 14px; line-height: 1.75; }
-    .insight-copy p { margin: 0 0 12px; }
-    .lever { display: inline-block; margin-top: 8px; padding: 11px 14px; border: 1px solid rgba(255,255,255,.35); color: #fff; font-size: 12px; font-weight: 700; }
-    .method { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; padding: 56px 0 58px; }
-    .method h2 { font-size: 31px; }
-    .method p { color: var(--muted); font-size: 12px; line-height: 1.7; }
-    .method-list { padding-left: 16px; }
-    .method-list li { padding: 0 0 7px 2px; color: var(--muted); font-size: 12px; line-height: 1.55; }
-    .footer { display: flex; justify-content: space-between; gap: 24px; padding: 18px 0 27px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; line-height: 1.5; }
-    .footer strong { color: var(--ink); }
-    :focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    @media (max-width: 760px) {
-      .page { width: min(100% - 30px, 600px); }
-      .topline { font-size: 9px; }
-      .topline .top-meta { display: none; }
-      .hero { grid-template-columns: 1fr; gap: 30px; padding: 47px 0 40px; }
-      h1 { max-width: 520px; font-size: clamp(48px, 13vw, 72px); }
-      .object-card { min-height: auto; }
-      .panel-figure { grid-template-columns: 1fr 140px; }
-      .passport-figure { grid-template-columns: 125px 1fr; }
-      .fit-grid { grid-template-columns: 1fr; }
-      .fit-card, .fit-card + .fit-card { padding: 17px 0; border-left: 0; }
-      .fit-card + .fit-card { border-top: 1px solid var(--line); }
-      .section-head { display: block; }
-      .section-intro { margin-top: 14px; }
-      .journey { padding: 52px 0; }
-      .path-controls { padding: 14px 18px 16px; }
-      .path-description-bar { align-items: flex-start; flex-direction: column; gap: 3px; padding: 14px 18px 0; }
-      .path-scene { grid-template-columns: 1fr; gap: 12px; padding: 0 18px 20px; }
-      .path-garment { grid-row: 1; min-height: 295px; }
-      .path-garment::before { width: 228px; height: 228px; }
-      .path-garment::after { bottom: 13px; width: 160px; }
-      .path-shirt { width: 195px; height: 228px; }
-      .path-garment-label { bottom: -4px; }
-      .path-side { padding: 13px 15px; }
-      .path-labels { gap: 2px; font-size: 8px; }
-      .path-labels span { line-height: 1.25; }
-      .path-enabler { padding: 13px 18px; }
-      .path-caveat { padding: 12px 18px 16px; }
-      .stress-shell { grid-template-columns: 1fr; }
-      .actor-picker { display: grid; grid-template-columns: repeat(2,1fr); border-right: 0; border-bottom: 1px solid var(--line); }
-      .actor-choice { min-height: 52px; border-bottom: 0; }
-      .stress-content { padding: 23px 20px; }
-      .stress-grid { grid-template-columns: 1fr; }
-      .insight { grid-template-columns: 1fr; gap: 17px; padding: 28px 23px; }
-      .method { grid-template-columns: 1fr; gap: 12px; padding: 43px 0; }
-      .footer { display: block; }
-      .footer span { display: block; margin-top: 6px; }
-    }
-    @media (max-width: 410px) {
-      .panel-figure { grid-template-columns: 1fr 120px; gap: 8px; }
-      .passport-figure { grid-template-columns: 105px 1fr; gap: 12px; }
-      .panel-stack { transform: scale(.82) skewY(-8deg) rotate(-2deg); }
-      .object-card { padding: 22px 17px; }
-      .evidence-item { padding-right: 10px; }
-      .evidence-item + .evidence-item { padding-left: 10px; }
-      .evidence-value { font-size: 22px; }
-      .evidence-label { font-size: 10px; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+    :root{--navy:#102b3a;--navy2:#173c4c;--teal:#287a78;--mint:#9be0c2;--lime:#d4ef7b;--paper:#f2f5f1;--white:#fff;--ink:#132b37;--muted:#58707a;--line:#d8e1dc;--amber:#d49a32;--coral:#a95f49;--shadow:0 14px 36px #102b3a12;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--serif:Georgia,'Times New Roman',serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--sans)}button,a{font:inherit}button{cursor:pointer}a{color:inherit}.shell{max-width:1240px;margin:auto;padding:0 28px}.topbar{height:68px;display:flex;align-items:center;justify-content:space-between;color:#dbe7e5;border-bottom:1px solid #ffffff22}.mast{background:var(--navy)}.brand{display:flex;align-items:center;gap:11px;color:#fff;font-size:12px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}.brand-mark{width:29px;height:29px;border:1px solid var(--mint);border-radius:50%;display:grid;place-items:center;color:var(--mint);font-size:18px}.nav{display:flex;gap:22px;align-items:center}.nav a{font-size:11px;text-decoration:none;color:#b9cbcc}.nav a:hover{color:white}.demo-tag{border:1px solid #ffffff3b;border-radius:999px;padding:6px 10px;color:var(--mint);font-size:10px;letter-spacing:.04em}
+    .hero{background:var(--navy);color:#fff;padding:46px 0 38px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;inset:auto -5% -110px 45%;height:170px;border:1px solid #ffffff15;border-radius:50% 50% 0 0/100% 100% 0 0;pointer-events:none}.hero-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:center}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:var(--teal);margin:0 0 10px}.hero .eyebrow{color:var(--mint)}h1{font:500 clamp(38px,5.2vw,64px)/.98 var(--serif);letter-spacing:-.045em;margin:0;max-width:520px}.hero-copy{color:#bbcdcf;max-width:495px;font-size:14px;margin:18px 0 20px}.hero-copy strong{color:white}.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:6px;padding:11px 14px;background:var(--lime);color:var(--navy);font-size:11px;font-weight:800;text-decoration:none}.btn:hover{filter:brightness(.95)}.btn.ghost{background:transparent;border:1px solid #ffffff42;color:#fff}.hero-status{display:flex;gap:8px;align-items:center;margin-top:18px;font-size:10px;color:#b9cbcc}.live-dot{width:7px;height:7px;background:var(--mint);border-radius:50%;box-shadow:0 0 0 4px #9be0c21b}
+    .bridge-panel{background:#e7efea;border-radius:12px;padding:13px 15px 12px;box-shadow:0 18px 45px #061e2a35;position:relative;z-index:1}.bridge-panel-head{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 7px;color:var(--navy);font-size:10px;font-weight:800}.bridge-panel-head span{font-size:9px;color:var(--muted);font-weight:600}.bridge-svg{width:100%;display:block;height:auto}.bridge-svg .selectable{cursor:pointer;outline:none}.bridge-svg .selectable .hit{fill:transparent;stroke:transparent;stroke-width:3}.bridge-svg .selectable:hover .hit,.bridge-svg .selectable:focus .hit,.bridge-svg .selectable.selected .hit{stroke:var(--amber);stroke-dasharray:5 4}.bridge-svg .selectable.selected .archline{stroke:var(--teal)}.bridge-svg .archline{transition:stroke .2s}.svg-label{font:700 10px var(--sans);fill:var(--navy)}.svg-small{font:9px var(--sans);fill:var(--muted)}.diagram-key{display:flex;justify-content:space-between;gap:8px;border-top:1px solid #173c4c20;padding:8px 4px;font-size:9px;color:var(--muted)}.pick-area{border-top:1px solid #173c4c20;padding:10px 2px 0}.pick-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 0 7px}.pick-head strong{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}.pick-head span{font-size:8px;color:var(--muted)}.pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.pick-btn{display:flex;align-items:center;gap:9px;width:100%;min-height:48px;padding:7px 9px;text-align:left;border:1px solid #ccd9d2;border-radius:6px;background:#f8faf8;color:var(--navy);transition:background .15s,border-color .15s,transform .15s}.pick-btn:hover{border-color:var(--teal);transform:translateY(-1px)}.pick-btn[aria-pressed="true"]{background:#dcefe5;border:2px solid var(--teal);padding:6px 8px}.pick-no{flex:none;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:#dce7e1;color:#34555d;font-size:10px;font-weight:900}.pick-btn[aria-pressed="true"] .pick-no{background:var(--teal);color:white}.pick-copy{min-width:0}.pick-copy b{display:block;font-size:9px;line-height:1.2}.pick-copy small{display:block;font-size:8px;line-height:1.2;color:var(--muted);margin-top:2px}
+    .tool-wrap{padding:34px 0 5px}.section-kicker{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:14px}.section-kicker h2{font:500 27px/1.05 var(--serif);letter-spacing:-.025em;margin:0}.section-kicker p{font-size:11px;color:var(--muted);margin:0;max-width:440px}.tool-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:13px}.card{background:var(--white);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}.inspector{padding:19px 20px}.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.card h3{font-size:13px;margin:0}.tiny-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 8px;font-size:9px;font-weight:800;background:#e5f2eb;color:#256546;white-space:nowrap}.pill:before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}.pill.estimate{background:#fbf1dd;color:#93691e}.pill.gap{background:#edf0ee;color:#65736f}.pill.demo{background:#f8e9e4;color:#915440}.asset-title{font:500 27px/1.1 var(--serif);margin:13px 0 6px}.asset-sub{font-size:11px;color:var(--muted);margin:0}.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:17px 0 12px}.stat{padding:11px 12px;background:#f2f6f3;border-radius:7px}.stat b{display:block;font:500 21px/1.1 var(--serif);color:var(--navy)}.stat span{font-size:9px;color:var(--muted)}.facts{border-top:1px solid var(--line);margin-top:12px;padding-top:5px}.fact{display:grid;grid-template-columns:100px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #edf1ee;font-size:10px}.fact:last-child{border:0}.fact strong{color:var(--muted);font-weight:650}.fact span{font-weight:700}.inspector-foot{font-size:9px;color:var(--muted);margin:11px 0 0}
+    .record{padding:0;overflow:hidden}.record-head{padding:16px 19px 0;display:flex;align-items:center;justify-content:space-between;gap:10px}.record-head h3{font:500 21px var(--serif)}.record-purpose{padding:7px 19px 0;margin:0;font-size:11px;line-height:1.45;color:var(--muted);max-width:700px}.layers{display:flex;gap:6px;padding:12px 19px 0;border-bottom:1px solid var(--line);overflow-x:auto}.layer{border:0;background:transparent;padding:9px 10px;color:var(--muted);font-size:10px;font-weight:800;border-bottom:2px solid transparent;white-space:nowrap}.layer[aria-selected="true"]{color:var(--teal);border-color:var(--teal)}.record-body{padding:16px 19px 19px;min-height:215px}.record-lede{font-size:11px;color:var(--muted);margin:0 0 12px;max-width:700px}.record-items{display:grid;grid-template-columns:1fr 1fr;gap:8px}.record-item{border:1px solid var(--line);border-radius:7px;padding:10px;background:#fbfcfb;min-height:67px}.record-item b{font-size:10px;display:block;margin-bottom:4px}.record-item span{font-size:9px;color:var(--muted)}.record-note{margin-top:11px;padding:10px 12px;background:#f5f1e5;border-left:3px solid var(--amber);font-size:9px;color:#66572f}.record-note a{color:#3d5d5a;text-underline-offset:2px}
+    .decision{padding:35px 0}.decision-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:14px}.decision-head h2,.rules-head h2{font:500 29px/1.05 var(--serif);margin:0}.decision-head p,.rules-head p{font-size:11px;color:var(--muted);margin:0;max-width:470px}.route-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.route{padding:15px;border:1px solid var(--line);border-radius:9px;background:#fff;text-align:left;color:var(--ink);transition:transform .15s,border .15s,box-shadow .15s}.route:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.route[aria-pressed="true"]{border:2px solid var(--teal);padding:14px;background:#f6fbf8}.route .route-no{font:500 22px var(--serif);color:var(--teal)}.route h3{font-size:11px;margin:4px 0}.route p{font-size:9px;color:var(--muted);margin:0}.route-result{margin-top:10px;display:grid;grid-template-columns:.8fr 1.2fr;gap:12px;padding:15px 17px;background:var(--navy);color:#fff;border-radius:9px}.route-result h3{font:500 18px var(--serif);margin:3px 0 6px}.route-result p{font-size:10px;color:#c4d3d3;margin:0}.route-result .tiny-label{color:var(--mint)}.checklist{display:flex;flex-wrap:wrap;gap:6px;align-content:start}.check{font-size:9px;padding:6px 8px;border:1px solid #ffffff38;border-radius:4px;color:#eff5f1}.mass-model{margin-top:10px;border:1px solid var(--line);border-radius:9px;background:#fff;padding:16px 18px;box-shadow:var(--shadow)}.mass-head{display:flex;justify-content:space-between;align-items:start;gap:14px}.mass-head h3{font:500 21px var(--serif);margin:2px 0 4px}.mass-head p{font-size:9px;color:var(--muted);margin:0;max-width:700px}.mass-baseline{flex:none;text-align:right;background:#edf4ef;border-radius:7px;padding:7px 10px}.mass-baseline b{display:block;font:500 22px var(--serif);color:var(--teal)}.mass-baseline span{font-size:8px;color:var(--muted)}.mass-controls{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0 10px}.mass-control label{display:flex;justify-content:space-between;gap:8px;font-size:9px;font-weight:800}.mass-control label output{color:var(--teal);font-size:10px}.mass-control input{display:block;width:100%;accent-color:var(--teal);margin:10px 0 4px}.mass-control small{font-size:8px;color:var(--muted)}.mass-results{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.mass-result{padding:9px 10px;border-radius:6px;background:#f3f6f4}.mass-result b{display:block;font:500 19px/1.1 var(--serif);color:var(--navy)}.mass-result span{font-size:8px;color:var(--muted)}.mass-bar{display:flex;height:15px;border-radius:4px;overflow:hidden;margin:10px 0 4px;background:#e8edeb}.mass-bar span{min-width:0;transition:width .2s}.mass-bar .reuse-seg{background:var(--teal)}.mass-bar .recovery-seg{background:#9ec77b}.mass-bar .unallocated-seg{background:#e8c16f}.mass-legend{display:flex;flex-wrap:wrap;gap:13px;font-size:8px;color:var(--muted)}.mass-legend i{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:4px}.mass-foot{font-size:8px;color:var(--muted);margin:10px 0 0;padding-top:8px;border-top:1px solid var(--line)}.mass-foot a{color:var(--teal);font-weight:800}.use-note{font-size:9px;color:var(--muted);margin:9px 2px}
+    .rules{background:#e4ece7;padding:32px 0}.rules-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:15px}.rules-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:11px}.rule-card{background:#fff;border-radius:9px;padding:17px 18px}.law{display:flex;align-items:center;gap:9px;margin-bottom:10px}.law-mark{width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:#e7f2ec;color:#276546;font-weight:900;font-size:12px}.law h3{font-size:12px;margin:0}.law small{font-size:9px;color:var(--muted)}.rule-card p{font-size:10px;color:#465e68;margin:8px 0}.timeline{display:grid;gap:0}.timeline-row{display:grid;grid-template-columns:75px 1fr;gap:12px;border-top:1px solid var(--line);padding:9px 0;font-size:9px}.timeline-row b{color:var(--teal)}.rule-card a{font-size:9px;color:var(--teal);font-weight:800;text-underline-offset:2px}.digi{background:var(--navy);color:white}.digi .law-mark{background:#d4ef7b;color:var(--navy)}.digi .law small,.digi p{color:#c1d1d1}.digi h3{color:white}.digi .digi-steps{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0}.digi-step{font-size:9px;padding:6px 8px;border:1px solid #ffffff3c;border-radius:5px;color:#e4efeb}.digi .callout{padding:9px 11px;background:#ffffff12;border-left:2px solid var(--lime);font-size:9px;color:#e5efeb}.digi a{color:var(--mint)}.disclaimer{font-size:9px;color:var(--muted);margin:10px 0 0}
+    .sources{padding:28px 0 30px}.sources-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:11px}.sources-head h2{font:500 25px var(--serif);margin:0}.sources-head span{font-size:9px;color:var(--muted)}.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.source{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;background:white;border:1px solid var(--line);border-radius:6px;text-decoration:none}.source:hover{border-color:var(--teal)}.source strong{font-size:9px;display:block}.source small{font-size:8px;color:var(--muted)}.arrow{color:var(--teal)}footer{background:var(--navy);color:#b7c9ca;padding:18px 0;font-size:9px}.footer-inner{display:flex;justify-content:space-between;gap:20px}.footer-inner strong{color:#fff}.footer-note{max-width:770px}
+    @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:22px}.bridge-panel{max-width:670px}.tool-grid,.rules-grid{grid-template-columns:1fr}.route-result{grid-template-columns:1fr}.section-kicker,.decision-head,.rules-head{align-items:flex-start;flex-direction:column}.source-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:580px){.shell{padding:0 16px}.topbar{height:59px}.nav{gap:11px}.nav a{font-size:9px}.demo-tag{display:none}.hero{padding:34px 0 27px}h1{font-size:45px}.hero-copy{font-size:12px}.bridge-panel{padding:10px}.bridge-panel-head{font-size:9px}.bridge-panel-head span{font-size:8px}.diagram-key{font-size:8px}.pick-grid{gap:5px}.pick-btn{min-height:54px;padding:6px}.pick-btn[aria-pressed="true"]{padding:5px}.pick-copy b{font-size:8px}.pick-copy small{font-size:7px}.tool-wrap{padding-top:26px}.section-kicker h2,.decision-head h2,.rules-head h2{font-size:25px}.stat-row{grid-template-columns:1fr 1fr}.fact{grid-template-columns:85px 1fr}.record-items{grid-template-columns:1fr}.record-body{min-height:auto}.route-grid{grid-template-columns:1fr}.route{display:grid;grid-template-columns:34px 1fr;column-gap:7px}.route .route-no{grid-row:span 2}.route h3{margin:2px 0}.route p{grid-column:2}.mass-head{flex-direction:column}.mass-baseline{text-align:left}.mass-controls{grid-template-columns:1fr;gap:10px}.mass-results{grid-template-columns:1fr 1fr}.mass-result:last-child{grid-column:1/-1}.mass-legend{gap:8px}.rules{padding:26px 0}.source-grid{grid-template-columns:1fr}.footer-inner{flex-direction:column}.sources-head{align-items:flex-start;flex-direction:column;gap:4px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+    .route p{font-size:10px;line-height:1.4}.route{min-height:112px;padding:14px 16px}.route[aria-pressed="true"]{padding:13px 15px}.route .route-no{display:block;margin-bottom:3px}.route h3{font-size:13px;margin:1px 0 5px}.route-result{align-items:start;grid-template-columns:1fr 1fr;gap:20px}.route-result p{font-size:12px;line-height:1.5}.route-result h3{font-size:22px}.next-checks{border-left:1px solid #ffffff35;padding-left:18px;color:#e8f0ed}.next-checks summary{font-size:12px;font-weight:800;cursor:pointer;color:var(--mint)}.next-checks ul{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;margin:12px 0;padding-left:18px;font-size:11px}.next-checks p{margin-top:10px!important}.mass-model{padding:20px}.mass-head h3{font-size:25px}.mass-head p{font-size:12px;line-height:1.45}.mass-baseline b{font-size:26px}.mass-baseline span{font-size:10px}.mass-control label{font-size:12px}.mass-control label output{font-size:13px}.mass-control small{font-size:10px}.mass-results{grid-template-columns:repeat(4,1fr);margin-top:15px}.mass-results.recovery-results{grid-template-columns:repeat(4,1fr)}.mass-result{padding:12px 14px}.mass-result b{font-size:22px}.mass-result span{font-size:10px}.mass-result.highlight{background:#e4f1ea;border:1px solid #bbd9c8}.mass-bar{height:18px;margin-top:14px}.mass-legend{font-size:10px}.use-note{font-size:11px;line-height:1.5}.support-details{margin:0 auto 28px;padding:0 28px}.support-details>summary{background:#fff;border:1px solid var(--line);border-radius:8px;padding:15px 18px;font-size:13px;font-weight:800;color:var(--navy);cursor:pointer;list-style:none}.support-details>summary::-webkit-details-marker{display:none}.support-details>summary:after{content:"+";float:right;color:var(--teal);font-size:18px;line-height:1}.support-details[open]>summary:after{content:"−"}.support-content{padding-top:18px}.rules{border-radius:10px}.sources{padding-bottom:10px}.rules-head h2{font-size:24px}.rule-card p{font-size:12px;line-height:1.55}.timeline-row{font-size:11px;line-height:1.45}.rule-card a{font-size:11px}.disclaimer{font-size:10px;line-height:1.5}.source-grid{grid-template-columns:repeat(2,1fr)}.source strong{font-size:11px}.source small{font-size:10px}.footer-note{font-size:10px;line-height:1.45}
+    @media(max-width:860px){.route-result{grid-template-columns:1fr}.next-checks{border-left:0;border-top:1px solid #ffffff35;padding:12px 0 0}.support-details{padding:0 28px}.mass-results,.mass-results.recovery-results{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:580px){.route-grid{grid-template-columns:1fr}.route{min-height:0}.mass-results,.mass-results.recovery-results{grid-template-columns:1fr 1fr}.mass-controls{grid-template-columns:1fr}.next-checks ul{grid-template-columns:1fr}.support-details{padding:0 16px}.source-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="topline">
-      <div class="brand"><span class="mark" aria-hidden="true">↻</span> Research note 01</div>
-      <div class="top-meta">Textiles · global value chains · circular policy</div>
-      <a href="#sources">Sources &amp; scope</a>
+  <div class="mast">
+    <header class="shell topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">↻</span>Circular Infrastructure Decisions</div>
+      <nav class="nav" aria-label="Main navigation"><a href="#explore">Bridge</a><a href="#reuse-check">Circular routes</a><a href="#passport-rules">Evidence</a></nav>
+      <span class="demo-tag">Independent concept demo</span>
     </header>
-
-    <main>
-      <section class="hero" aria-labelledby="main-title">
+    <section class="hero" id="explore">
+      <div class="shell hero-grid">
         <div>
-          <div class="eyebrow">A portfolio concept · circular textiles</div>
-          <h1 id="main-title">When clothing travels, does responsibility travel too?</h1>
-          <p class="hero-copy">A digital product passport can describe a garment. But circularity depends on whether accurate, usable information reaches the people who sort, repair and recover it—and whether policy supports the systems working beyond the EU.</p>
-          <div class="hero-note"><span class="dot" aria-hidden="true"></span> The interactive case follows the data, actors and policy questions</div>
+          <p class="eyebrow">Van Brienenoordbrug · circularity tool</p>
+          <h1>Turning bridge data into <span style="color:var(--mint)">circular decisions.</span></h1>
+          <p class="hero-copy">Explore how linked asset, product and reuse information can help project teams assess a part’s next use, using the Van Brienenoordbrug as an example.</p>
+          <div class="actions"><a class="btn" href="#passport-tool">Inspect a bridge part ↓</a></div>
         </div>
-
-        <aside class="object-card" aria-label="Illustrative garment and example product passport fields">
-          <div class="object-heading"><strong>One garment, several decision points</strong><span>Illustrative item</span></div>
-          <div class="passport-figure">
-            <div class="shirt-art" role="img" aria-label="Simple illustration of a T-shirt">
-              <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M39 19 52 13c3 8 13 8 16 0l13 6 23 18-12 17-12-8v78H40V46l-12 8-12-17 23-18Z" fill="#8FA48B" stroke="#335F4B" stroke-width="2.4" stroke-linejoin="round"/>
-                <path d="M49 15c1 8 5 12 11 12s10-4 11-12" stroke="#335F4B" stroke-width="2.4"/>
-                <path d="M78 46v67" stroke="#DCE8DD" stroke-width="1.5" stroke-dasharray="3 4"/>
-                <g class="wear-marks" stroke="#65716A" stroke-width="1.4" stroke-linecap="round">
-                  <path d="M47 110h8M63 115h7M33 47l5 4"/>
-                </g>
-                <path d="M89 63h16v37H89z" fill="#F3F1E9" stroke="#335F4B" stroke-width="1.5"/>
-                <circle cx="97" cy="71" r="3" fill="#BC633D"/>
-                <path d="M94 80h7M94 85h7M94 90h5" stroke="#65716A" stroke-width="1.4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="passport-fields">
-              <div class="passport-field"><strong>Composition</strong>Reliable fibre data</div>
-              <div class="passport-field"><strong>Traceability</strong>Identity across handovers</div>
-              <div class="passport-field"><strong>Access</strong>Right data for each actor</div>
+        <div class="bridge-panel">
+          <div class="bridge-panel-head"><strong>VAN BRIENENOORDBRUG · SELECT A PART</strong></div>
+          <svg class="bridge-svg" viewBox="0 0 680 300" role="img" aria-labelledby="bridgeTitle bridgeDesc">
+            <title id="bridgeTitle">Selectable schematic of the Van Brienenoordbrug</title>
+            <desc id="bridgeDesc">Select the west arch, bridge deck or supports to view linked records and the information that could support a reuse decision.</desc>
+            <defs><linearGradient id="river" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#c8ddd3"/><stop offset="1" stop-color="#a8c7bd"/></linearGradient><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#287a78" stroke-width="1.5"/></marker></defs>
+            <rect width="680" height="300" rx="8" fill="#edf3ee"/><path d="M0 208Q55 197 110 208T220 208T330 208T440 208T550 208T680 208V300H0Z" fill="url(#river)"/><path d="M0 226Q55 216 110 226T220 226T330 226T440 226T550 226T680 226" fill="none" stroke="#90b5a9" stroke-width="2"/>
+            <g class="selectable" data-part="west-arch" tabindex="0" role="button" aria-label="Select existing west arch" aria-pressed="true"><path class="hit" d="M62 200Q188 26 315 200" fill="none" stroke-width="20"/><path class="archline" d="M62 200Q188 26 315 200" fill="none" stroke="#bf8b31" stroke-width="10"/><path d="M75 197L75 238M130 138L130 238M188 85L188 238M246 138L246 238M302 197L302 238" stroke="#73878a" stroke-width="3"/><circle cx="188" cy="24" r="13" fill="#287a78" stroke="#fff" stroke-width="3"/><text x="188" y="28" text-anchor="middle" style="font:800 10px var(--sans);fill:#fff">1</text><rect x="72" y="41" width="154" height="39" rx="6" fill="#fff"/><text x="84" y="58" class="svg-label">EXISTING WEST ARCH</text><text x="84" y="71" class="svg-small">planned renovation + reuse</text></g>
+            <g class="selectable" data-part="east-arch" tabindex="0" role="button" aria-label="Select east arch position" aria-pressed="false"><path class="hit" d="M366 200Q492 26 619 200" fill="none" stroke-width="20"/><path class="archline" d="M366 200Q492 26 619 200" fill="none" stroke="#385968" stroke-width="10"/><path d="M379 197L379 238M434 138L434 238M492 85L492 238M550 138L550 238M606 197L606 238" stroke="#73878a" stroke-width="3"/><circle cx="492" cy="24" r="13" fill="#385968" stroke="#fff" stroke-width="3"/><text x="492" y="28" text-anchor="middle" style="font:800 10px var(--sans);fill:#fff">2</text><rect x="449" y="41" width="152" height="39" rx="6" fill="#fff"/><text x="461" y="58" class="svg-label">EAST POSITION</text><text x="461" y="71" class="svg-small">planned receiving point</text></g>
+            <g class="selectable" data-part="deck" tabindex="0" role="button" aria-label="Select bridge deck" aria-pressed="false"><path class="hit" d="M30 200L650 200" fill="none" stroke-width="20"/><path d="M30 200L650 200" stroke="#173c4c" stroke-width="11" stroke-linecap="round"/><path d="M43 200L637 200" stroke="#eaf2ee" stroke-width="2" stroke-dasharray="12 10"/><circle cx="340" cy="177" r="13" fill="#385968" stroke="#fff" stroke-width="3"/><text x="340" y="181" text-anchor="middle" style="font:800 10px var(--sans);fill:#fff">3</text><rect x="275" y="231" width="130" height="25" rx="5" fill="#fff"/><text x="340" y="248" class="svg-label" text-anchor="middle">BRIDGE DECK</text></g>
+            <g class="selectable" data-part="support" tabindex="0" role="button" aria-label="Select bridge supports" aria-pressed="false"><path class="hit" d="M342 200V252" fill="none" stroke-width="20"/><path d="M342 200V252" stroke="#425f69" stroke-width="8"/><rect x="326" y="254" width="32" height="8" rx="2" fill="#425f69"/><circle cx="342" cy="263" r="12" fill="#385968" stroke="#fff" stroke-width="3"/><text x="342" y="267" text-anchor="middle" style="font:800 9px var(--sans);fill:#fff">4</text><text x="342" y="286" class="svg-small" text-anchor="middle">SUPPORTS</text></g>
+            <path d="M265 114C318 59 359 56 414 113" fill="none" stroke="#287a78" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arr)"/><rect x="282" y="86" width="116" height="25" rx="12" fill="#d5eee3"/><text x="340" y="102" class="svg-small" text-anchor="middle" style="font-weight:800;fill:#24665e">MOVE · REPAIR · REUSE</text>
+          </svg>
+          <div class="pick-area"><div class="pick-head"><strong>Choose a part</strong></div>
+            <div class="pick-grid" role="group" aria-label="Choose a bridge component or position">
+              <button class="pick-btn" data-part="west-arch" aria-pressed="true"><span class="pick-no">1</span><span class="pick-copy"><b>Existing west arch</b><small>Planned to be renovated and reused</small></span></button>
+              <button class="pick-btn" data-part="east-arch" aria-pressed="false"><span class="pick-no">2</span><span class="pick-copy"><b>East position</b><small>Where the renovated arch is planned to go</small></span></button>
+              <button class="pick-btn" data-part="deck" aria-pressed="false"><span class="pick-no">3</span><span class="pick-copy"><b>Bridge deck</b><small>Example passport record</small></span></button>
+              <button class="pick-btn" data-part="support" aria-pressed="false"><span class="pick-no">4</span><span class="pick-copy"><b>Bridge supports</b><small>Example passport record</small></span></button>
             </div>
           </div>
-          <div class="object-foot"><span>Example fields, not a real garment record</span><span>Policy lens</span></div>
-        </aside>
-      </section>
-
-      <section class="evidence" aria-label="Textile value-chain context from published sources">
-        <div class="evidence-item"><span class="evidence-value">1.4m tonnes</span><span class="evidence-label">Used textiles exported from the EU annually, mainly to Africa and Asia<br><span class="evidence-source">EEA figure cited by Circle Economy</span></span></div>
-        <div class="evidence-item"><span class="evidence-value">25m garments / month</span><span class="evidence-label">Estimated recirculation at Kantamanto Market in Ghana; not an EU-only count<br><span class="evidence-source">The Or Foundation estimate</span></span></div>
-        <div class="evidence-item"><span class="evidence-value">3 conditions</span><span class="evidence-label">Reliable data · useful access · support for implementation<br><span class="evidence-source">Circle Economy DPP recommendations</span></span></div>
-      </section>
-
-      <section class="fit-section" aria-labelledby="fit-title">
-        <div class="section-kicker">Why this connects to Circle Economy</div>
-        <h2 id="fit-title">One garment. Three research questions.</h2>
-        <div class="fit-grid">
-          <article class="fit-card"><h3>Measure material flows</h3><p>Circle Economy’s Circularity Gap Report for Textiles follows materials from production to post-consumer management. This case asks what product-level information could make those flows more visible.</p></article>
-          <article class="fit-card"><h3>Understand the whole value chain</h3><p>Used clothing crosses borders. A circular transition needs to account for the workers, businesses and communities that enable sorting, repair, resale and recovery in trading-partner countries.</p></article>
-          <article class="fit-card"><h3>Connect evidence to policy</h3><p>Circle Economy’s textile passport recommendations focus on access, traceability, reliable data and implementation support. The stages below turn those recommendations into practical decision points.</p></article>
         </div>
-      </section>
-
-      <section class="journey" aria-labelledby="journey-title">
-        <div class="section-head">
-          <div><div class="section-kicker">An ideal circular pathway</div><h2 id="journey-title">Keep the garment’s value<br>in use for longer.</h2></div>
-          <p class="section-intro">Slide through one garment’s intended journey: extend its useful life first, then recover materials when it can no longer be used. “Value” here means function, materials and future options—not a made-up price.</p>
-        </div>
-        <div class="journey-shell">
-          <div class="path-heading" aria-live="polite" aria-atomic="true">
-            <div class="stage-tag" id="path-tag">Stage 01 · design</div>
-            <h3 id="path-title">Make a garment worth keeping</h3>
-          </div>
-          <div class="path-scene">
-            <div class="path-side">
-              <small>What happens</small>
-              <p id="path-action">Choose durable construction and materials, and record what the garment is made from.</p>
-            </div>
-            <div class="path-garment">
-              <svg class="path-shirt" id="path-shirt" data-stage="0" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of the garment at its current lifecycle stage">
-                <defs>
-                  <linearGradient id="shirtFabric" x1="20" y1="0" x2="110" y2="90" gradientUnits="userSpaceOnUse"><stop stop-color="#6f8d76"/><stop offset=".48" stop-color="#a9bba2"/><stop offset="1" stop-color="#708a73"/></linearGradient>
-                  <linearGradient id="shirtFold" x1="42" y1="50" x2="70" y2="110" gradientUnits="userSpaceOnUse"><stop stop-color="#f5f4eb" stop-opacity=".55"/><stop offset="1" stop-color="#335f4b" stop-opacity=".08"/></linearGradient>
-                </defs>
-                <path class="shirt-body" d="M39 19 52 13c3 8 13 8 16 0l13 6 23 18-12 17-12-8v78H40V46l-12 8-12-17 23-18Z" fill="url(#shirtFabric)" stroke="#335F4B" stroke-width="2.4" stroke-linejoin="round"/>
-                <path d="M49 15c1 8 5 12 11 12s10-4 11-12" stroke="#335F4B" stroke-width="2.4"/>
-                <path d="M78 46v67" stroke="#DCE8DD" stroke-width="1.5" stroke-dasharray="3 4"/>
-                <path class="shirt-fold" d="M44 52c10 5 12 16 9 29m18-18c-7 10-4 23 2 33m-25 6c7-2 15 0 21 5" stroke="url(#shirtFold)" stroke-width="3" stroke-linecap="round"/>
-                <path class="repair-patch" d="M45 78h20v20H45z" fill="#BC633D" stroke="#335F4B" stroke-width="1.5"/>
-                <path class="repair-stitches" d="M48 82h14M48 87h14M48 92h14" stroke="#F3F1E9" stroke-width="1" stroke-dasharray="2 2"/>
-                <g class="reuse-tag" stroke="#335F4B" stroke-width="1.5" fill="#F3F1E9">
-                  <path d="m80 69 18 2 9 12-15 15-12-10z"/>
-                  <circle cx="84" cy="76" r="2" fill="#BC633D"/>
-                  <path d="m87 80 12 2"/>
-                </g>
-                <g class="sorting-overlay" stroke="#BC633D" stroke-width="1.5" stroke-dasharray="3 3">
-                  <path d="M29 58h61v56H29z"/>
-                  <circle cx="97" cy="104" r="9" fill="#F3F1E9"/>
-                  <path d="m104 111 8 8" stroke-dasharray="none"/>
-                </g>
-                <g class="fiber-bundle" stroke-linecap="round" stroke-width="3">
-                  <path d="M27 82c8-14 19 14 27 0s19 14 27 0" stroke="#335F4B"/>
-                  <path d="M22 94c8-14 19 14 27 0s19 14 27 0" stroke="#8FA48B"/>
-                  <path d="M28 106c8-14 19 14 27 0s19 14 27 0" stroke="#BC633D"/>
-                  <path d="M83 79c8-14 19 14 27 0" stroke="#6B8790"/>
-                </g>
-              </svg>
-              <span class="path-garment-label" id="path-garment-label">Designed to last</span>
-            </div>
-            <div class="path-side value-side">
-              <small>Value kept</small>
-              <p id="path-value">A useful garment, its material investment and the option to repair or reuse it later.</p>
-            </div>
-          </div>
-          <div class="path-description-bar"><strong id="path-description">The garment is designed for durability, care and repair. Reliable material information keeps future options visible from the start.</strong><span id="path-step" aria-live="polite">Stage 1 of 6</span></div>
-          <div class="path-controls">
-            <label class="sr-only" for="path-slider">Move through the garment’s ideal circular lifecycle</label>
-            <input class="path-range" id="path-slider" type="range" min="0" max="5" step="1" value="0" aria-describedby="path-caveat">
-            <div class="path-labels" aria-hidden="true"><span>Design</span><span>Use</span><span>Repair</span><span>Reuse</span><span>Sort</span><span>Recover</span></div>
-          </div>
-          <div class="path-enabler"><small>What enables this stage</small><p id="path-enabler">Durability, repairable construction, clear care guidance and trustworthy product data.</p></div>
-          <p class="path-caveat" id="path-caveat">Illustrative best-case pathway, not a prediction. Real routes depend on condition, collection, markets, information and local repair or recovery capacity.</p>
-        </div>
-      </section>
-
-      <section class="stress-test" aria-labelledby="stress-title">
-        <div class="section-head">
-          <div><div class="section-kicker">A practical policy check</div><h2 id="stress-title">Would the policy work<br>for the people in the chain?</h2></div>
-          <p class="section-intro">Select an actor to see what a usable passport or policy would need to make possible. This turns the research into questions a policy team could test.</p>
-        </div>
-        <div class="stress-shell">
-          <div class="actor-picker" role="group" aria-label="Choose a textile value-chain actor">
-            <button class="actor-choice" type="button" aria-pressed="true" data-actor="repair">Repair &amp; reuse business</button>
-            <button class="actor-choice" type="button" aria-pressed="false" data-actor="sorter">Sorter or recycler</button>
-            <button class="actor-choice" type="button" aria-pressed="false" data-actor="pro">Producer-responsibility body</button>
-            <button class="actor-choice" type="button" aria-pressed="false" data-actor="supplier">Supplier or worker</button>
-          </div>
-          <div class="stress-content" aria-live="polite" aria-atomic="true">
-            <div class="stage-tag" id="stress-tag">Actor 01 · downstream business</div>
-            <h3 id="stress-actor-title">Repair &amp; reuse business</h3>
-            <p id="stress-context">A repairer needs to identify a garment and understand its construction before recommending a repair or resale route.</p>
-            <div class="stress-grid">
-              <div class="stress-card"><small>Decision to support</small><p id="stress-decision">Can this item be repaired, and what is the most suitable next use?</p></div>
-              <div class="stress-card"><small>Information needed</small><p id="stress-data">Clear material composition, care instructions and relevant repair guidance that can be accessed without specialist software.</p></div>
-              <div class="stress-card"><small>Policy design test</small><p id="stress-test-question">Can a small repair business access and use the information at low cost, in the language and format it needs?</p></div>
-              <div class="stress-card"><small>Red flag to watch for</small><p id="stress-risk">The passport exists, but repairers cannot find or understand the fields they need.</p></div>
-            </div>
-            <p class="stress-note">Independent synthesis based on Circle Economy’s published recommendations and trading-partner research. These are proposed questions, not measured results or an official Circle Economy tool.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="insight" aria-labelledby="insight-title">
-        <div><div class="section-kicker">The point I want to make</div><h2 id="insight-title">A passport is not circularity by itself.</h2></div>
-        <div class="insight-copy">
-          <p>It can help people make circular decisions only when its information is reliable, accessible to the actors who need it, and supported by workable systems for collecting and checking data.</p>
-          <p>And when clothing moves across borders, policy needs to consider where the benefits, implementation costs and end-of-life responsibilities land—not only what happens in the market where the product was first sold.</p>
-          <span class="lever">Research question: how can textile policy and product data support circularity across borders without shifting costs down the chain?</span>
-        </div>
-      </section>
-
-      <section class="method" id="sources" aria-labelledby="method-title">
-        <div>
-          <div class="section-kicker">What this concept demonstrates</div>
-          <h2 id="method-title">From a product tool<br>to a policy question.</h2>
-          <p>My current work at DAMEN involves structuring product and material information for a ship-cabin passport. Here, I carry that practical data question into textiles—a sector central to Circle Economy’s research—and connect it to material-flow analysis, global value chains and policy design.</p>
-          <p>This is an independent portfolio concept inspired by Circle Economy’s published work, not an official Circle Economy project or an assessment of a specific garment.</p>
-        </div>
-        <div>
-          <p><strong>Sources that ground the case</strong></p>
-          <ul class="method-list">
-            <li><a href="https://www.circle-economy.com/knowledge-hub/article/cXSM" target="_blank" rel="noreferrer">Circle Economy’s recommendations for an effective textile Digital Product Passport</a> (2026).</li>
-            <li><a href="https://www.circle-economy.com/knowledge-hub/article/uyuP" target="_blank" rel="noreferrer">Apparel Recovery Coalition announcement</a> (2026), including the EEA export figure and the Or Foundation’s Kantamanto estimate.</li>
-            <li><a href="https://www.circle-economy.com/knowledge-hub/article/nSIT" target="_blank" rel="noreferrer">Circularity Gap Report Textiles</a> (2024), on material flows across the textile value chain.</li>
-            <li><a href="https://circle-economy.com/knowledge-hub/article/abpl?title=Socioeconomic-Impacts-of-European-Union-Circular-Textiles-Policies-on-Trading-Partners" target="_blank" rel="noreferrer">Research on the socioeconomic impacts of EU circular-textile policies on trading partners</a> (2024).</li>
-          </ul>
-          <p><strong>Important context</strong></p>
-          <ul class="method-list">
-            <li>The EU export figure and Kantamanto estimate describe different flows; the market figure is not an EU-only count.</li>
-            <li>The garment journey is illustrative. No claim is made about the destination or outcome of a particular item.</li>
-          </ul>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer"><strong>Research note 01 · Circular textiles &amp; global value chains</strong><span>Independent portfolio concept · grounded in linked Circle Economy and partner sources.</span></footer>
+      </div>
+    </section>
   </div>
 
+  <main>
+    <section class="shell tool-wrap" id="passport-tool" aria-labelledby="tool-title">
+      <div class="section-kicker"><div><p class="eyebrow">01 · bridge passport</p><h2 id="tool-title">The selected part</h2></div><p>See the public facts, the records a passport could link, and what is still unknown.</p></div>
+      <div class="tool-grid">
+        <article class="card inspector" aria-live="polite">
+          <div class="card-top"><span class="tiny-label">Selected asset</span><span id="statusPill" class="pill">Public plan found</span></div>
+          <h3 class="asset-title" id="assetTitle">Existing west arch</h3>
+          <p class="asset-sub" id="assetSub">Van Brienenoordbrug · steel arch · the project plan describes renovation and a second use.</p>
+          <div class="stat-row" id="assetStats"><div class="stat"><b>1990</b><span>year built · source-backed</span></div><div class="stat"><b>~3,000 t</b><span>steel planned for reuse · estimate</span></div></div>
+          <div class="facts" id="factsList"></div>
+          <p class="inspector-foot">Some project information may not be publicly available. This demo highlights the evidence that could support a reuse assessment.</p>
+        </article>
+        <article class="card record">
+          <div class="record-head"><div><span class="tiny-label">Why a passport?</span><h3 id="recordTitle">Support reuse decisions</h3></div><span class="pill demo">Concept schema</span></div>
+          <p class="record-purpose">It links bridge, product and reuse information so project teams can find relevant evidence, assess a part’s next use and spot data gaps.</p>
+          <div class="layers" role="tablist" aria-label="Passport record layers">
+            <button class="layer" role="tab" aria-selected="true" data-layer="asset">Bridge record</button>
+            <button class="layer" role="tab" aria-selected="false" data-layer="product">Product DPP</button>
+            <button class="layer" role="tab" aria-selected="false" data-layer="reuse">Reuse evidence</button>
+          </div>
+          <div class="record-body" id="recordBody" role="tabpanel" aria-live="polite"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell decision" id="reuse-check" aria-labelledby="decision-title">
+      <div class="decision-head"><div><p class="eyebrow">02 · compare outcomes</p><h2 id="decision-title">Compare three circular routes</h2></div><p>Route 1 is the current plan for the west arch. Routes 2 and 3 test different options for the old east arch.</p></div>
+      <div class="route-grid" role="group" aria-label="Select circular route">
+        <button class="route" data-route="whole" aria-pressed="true"><span class="route-no">01</span><h3>Existing west arch → east position</h3><p>Current plan: renovate and move the arch.</p></button>
+        <button class="route" data-route="parts" aria-pressed="false"><span class="route-no">02</span><h3>Old east arch → component reuse</h3><p>Estimate how much could find a new use.</p></button>
+        <button class="route" data-route="materials" aria-pressed="false"><span class="route-no">03</span><h3>Old east arch → material recovery</h3><p>Estimate recovered output after processing losses.</p></button>
+      </div>
+      <div class="route-result" id="routeResult" aria-live="polite"></div>
+      <div class="mass-model" id="massModel" hidden aria-live="polite"></div>
+      <p class="use-note">The old east arch’s 6,300 t baseline comes from a 2023 listing. Scenario percentages are editable assumptions, not project data.</p>
+    </section>
+
+    <details class="support-details shell" id="passport-rules"><summary>Passport context, EU rules and research sources</summary><div class="support-content">
+    <section class="rules" aria-labelledby="rules-title">
+      <div class="shell">
+        <div class="rules-head"><div><p class="eyebrow">03 · why passports matter</p><h2 id="rules-title">EU product data. Bridge asset context.</h2></div><p>The legal DPP and a bridge passport can connect, but they answer different questions.</p></div>
+        <div class="rules-grid">
+          <article class="rule-card">
+            <div class="law"><span class="law-mark">EU</span><div><h3>Construction Products Regulation · EU 2024/3110</h3><small>Rules for construction products placed on the EU market</small></div></div>
+            <p>The revised CPR sets up a <strong>digital passport system for construction products</strong>. The passport is product-linked and is intended to carry information such as product performance and conformity, technical documentation, safety information and identifiers. It also aims to improve traceability and support reuse.</p>
+            <div class="timeline">
+              <div class="timeline-row"><b>8 Jan 2026</b><span>Main part of the revised CPR starts applying; product families transition at different times.</span></div>
+              <div class="timeline-row"><b>Q2 2027*</b><span>Commission planning page lists a delegated act for construction product DPP requirements and service providers.</span></div>
+              <div class="timeline-row"><b>After the act</b><span>Article 80 sets an 18-month period for mandatory manufacturer DPP use through the system; detail depends on the applicable rules.</span></div>
+            </div>
+            <p class="disclaimer">*Commission indicative planning date, checked 11 October 2026; dates and implementation can change.</p>
+            <a href="https://eur-lex.europa.eu/eli/reg/2024/3110/oj/eng" target="_blank" rel="noreferrer">Read Regulation 2024/3110, especially Articles 75–80 ↗</a><br>
+            <a href="https://single-market-economy.ec.europa.eu/single-market/digital-product-passport_en" target="_blank" rel="noreferrer">Commission DPP page and planning ↗</a>
+          </article>
+          <article class="rule-card digi">
+            <div class="law"><span class="law-mark">NL</span><div><h3>Where digiGO fits</h3><small>Dutch digital collaboration for the built environment</small></div></div>
+            <p>digiGO helps align how construction and infrastructure partners share digital information. Its building-passport work shows a useful hierarchy for this idea: <strong>asset → element → product → component → material</strong>.</p>
+            <div class="digi-steps"><span class="digi-step">Bridge asset</span><span class="digi-step">Arch / element</span><span class="digi-step">Product record</span><span class="digi-step">Part + material</span></div>
+            <div class="callout">A Dutch government agreement lists a work item for Rijkswaterstaat and the Central Government Real Estate Agency to develop a passport format for exchanging concrete data in infrastructure, housing and utility buildings. This is a relevant direction—not proof of an approved bridge passport standard.</div>
+            <p>So this demo uses the same practical idea: connect product-level information to the bridge asset and the reuse decision, while keeping each source and data gap visible.</p>
+            <a href="https://www.digigo.nu/wp-content/uploads/2025/09/Gebouwpaspoort-demo.pdf" target="_blank" rel="noreferrer">See digiGO’s building-passport demo ↗</a><br>
+            <a href="https://www.digigo.nu/wp-content/uploads/2024/10/Bestuursakkoord-Bijlage-A_versie_1.01-1.pdf" target="_blank" rel="noreferrer">See the Dutch agreement work plan (measure 16.3) ↗</a>
+          </article>
+        </div>
+        <p class="disclaimer">Important distinction: EU law addresses construction products and product information. It does not, by itself, mean that every existing bridge must have one legal passport for its whole life. A bridge-level record is a proposed asset-management tool; whether a specific reused arch or product falls under a product obligation depends on the facts and applicable rules.</p>
+      </div>
+    </section>
+
+    <section class="shell sources" aria-labelledby="sources-title">
+      <div class="sources-head"><h2 id="sources-title">Open the source behind the record</h2><span>Project claims are separated from estimates and proposed fields.</span></div>
+      <div class="source-grid">
+        <a class="source" href="https://www.rijkswaterstaat.nl/nieuws/archief/2026/10/rijkswaterstaat-en-samen-tekenen-contract-voor-transport-en-installatie-nieuwe-boogbruggen-van-brienenoordbrug" target="_blank" rel="noreferrer"><span><strong>RWS · Transport and installation</strong><small>9 Oct 2026 · logistics and project plan</small></span><span class="arrow">↗</span></a>
+        <a class="source" href="https://www.rijkswaterstaat.nl/nieuws/archief/2026/09/start-aanbesteding-voor-bouw-nieuwe-westelijke-boog-van-brienenoordbrug" target="_blank" rel="noreferrer"><span><strong>RWS · New west arch procurement</strong><small>2 Sep 2026 · route and schedule</small></span><span class="arrow">↗</span></a>
+        <a class="source" href="https://repository.officiele-overheidspublicaties.nl/Bijlagen/TerInzageLegging/2022/til-2022-3008/1/bijlage/01.RuimtelijkeOnderbouwingROB.pdf" target="_blank" rel="noreferrer"><span><strong>RWS · Spatial planning statement</strong><small>2022 · 3,000 t estimate and scope</small></span><span class="arrow">↗</span></a>
+        <a class="source" href="https://www.arup.com/en-us/insights/a-stronger-future-for-our-bridges/" target="_blank" rel="noreferrer"><span><strong>Arup · A stronger future for our bridges</strong><small>Updated Oct 2025 · 3,200 t and carbon claim</small></span><span class="arrow">↗</span></a>
+        <a class="source" href="https://www.nationalebruggenbank.nl/wp-content/uploads/Aanbod-1-Maart-2023.pdf" target="_blank" rel="noreferrer"><span><strong>National Bridges Bank · March 2023 offer list</strong><small>East arch: 307 m span, 22 m width, 6,300 t</small></span><span class="arrow">↗</span></a>
+        <a class="source" href="https://www.bruggenstichting.nl/tijdschrift/158-bruggen/bruggen-2021/bruggen-juni-2021" target="_blank" rel="noreferrer"><span><strong>Bruggen · reuse study for the east arch</strong><small>2021 · 3D model, inspections, drawings and site checks</small></span><span class="arrow">↗</span></a>
+        <a class="source" href="https://www.nationalebruggenbank.nl/area/rotterdam/" target="_blank" rel="noreferrer"><span><strong>National Bridges Bank · current Rotterdam listings</strong><small>Current listing shows no offered part for the bridge</small></span><span class="arrow">↗</span></a>
+        <a class="source" href="https://open.rijkswaterstaat.nl/publish/pages/204194/rapportage_ib_ce_liggers_en_bestaand_areaal_def.pdf" target="_blank" rel="noreferrer"><span><strong>RWS / Royal HaskoningDHV · Girder data needs</strong><small>13 Dec 2024 · concrete girder reuse data</small></span><span class="arrow">↗</span></a>
+        <a class="source" href="https://bezoekerscentrum.rijkswaterstaat.nl/SchipholAmsterdamAlmere/news/liggers-a9-krijgen-tweede-leven-in-a44/" target="_blank" rel="noreferrer"><span><strong>RWS · A9 girders to A44</strong><small>15 Mar 2024 · separate concrete reference</small></span><span class="arrow">↗</span></a>
+        <a class="source" href="https://www.atosborne.nl/blog/at-osborne-pwc-en-generation-ondersteunen-rijkswaterstaat-bij-de-projectbeheersing-van-de-bruggenwerf" target="_blank" rel="noreferrer"><span><strong>AT Osborne · Bruggenwerf project controls</strong><small>PwC / RWS project context</small></span><span class="arrow">↗</span></a>
+      </div>
+    </section>
+    </div></details>
+  </main>
+  <footer><div class="shell footer-inner"><div class="footer-note"><strong>About this demo.</strong> Independent concept based on public information. It is not a Rijkswaterstaat, digiGO or PwC system. An absent public value may be held by project teams. This tool does not establish engineering suitability, regulatory compliance or carbon savings.</div><div>Research cut-off · 11 October 2026</div></div></footer>
   <script>
-    const circularStages = [
-      {
-        label: "design", title: "Make a garment worth keeping", garment: "Designed to last",
-        description: "The garment is designed for durability, care and repair. Reliable material information keeps future options visible from the start.",
-        action: "Choose durable construction and materials, and record what the garment is made from.",
-        value: "A useful garment, its material investment and the option to repair or reuse it later.",
-        enabler: "Durability, repairable construction, clear care guidance and trustworthy product data."
-      },
-      {
-        label: "use and care", title: "Keep it in use", garment: "In active use",
-        description: "The first circular priority is to get useful wear from the garment. Care instructions help the owner maintain it and avoid replacing it too soon.",
-        action: "Wear and care for the garment; keep it in service for as long as it meets the owner’s needs.",
-        value: "Its function as clothing and the materials already used to make it.",
-        enabler: "Useful care information, good quality and access to maintenance."
-      },
-      {
-        label: "repair", title: "Repair before replacing", garment: "Repaired, ready to wear",
-        description: "When a seam, button or other part fails, repair restores the garment’s function and gives its materials another period of use.",
-        action: "Repair the damaged part and return the garment to use rather than discarding the whole item.",
-        value: "More usable life from the garment and its existing material—without making a new one for this use.",
-        enabler: "Repairable construction, accessible repair skills and guidance, and affordable repair options."
-      },
-      {
-        label: "reuse", title: "Pass it on for another use", garment: "A second use begins",
-        description: "If the garment no longer suits its current owner but remains wearable, another person can use it. The pathway extends the garment’s function before material recovery.",
-        action: "Resell, exchange or donate wearable clothing through a route where it can realistically be used.",
-        value: "The garment’s remaining use as clothing, plus the materials and work embodied in it.",
-        enabler: "Collection and resale or reuse channels that match garment condition with real demand."
-      },
-      {
-        label: "collect and sort", title: "Choose the next route by condition", garment: "Assessed for its next route",
-        description: "When it is no longer wearable as clothing, collection and sorting determine whether it can be repaired further, reused in another form, or sent to material recovery.",
-        action: "Assess condition and composition, then send the item to the highest-value route that is actually available.",
-        value: "Potential for further use or material recovery; sorting prevents usable items and suitable fibres from being lost together.",
-        enabler: "Separate collection, skilled sorting, accurate composition information and functioning local routes."
-      },
-      {
-        label: "material recovery", title: "Recover material when use is over", garment: "Material recovery, where feasible",
-        description: "If no further use is viable, recover fibres where technology, material mix and quality allow. Recovered material may return to textile production, but not every fibre can be recycled into equivalent new clothing.",
-        action: "Use a suitable recycling route and return recovered material to production where quality and market demand allow.",
-        value: "Some material value can be retained; losses and lower-quality outputs may remain, so recycling is not an endless loop.",
-        enabler: "Verified fibre data, suitable recycling capacity, demand for recovered inputs and responsible handling of residues."
-      }
-    ];
-    const pathSlider = document.getElementById('path-slider');
-    function updateCircularPath() {
-      const index = Number(pathSlider.value);
-      const data = circularStages[index];
-      document.getElementById('path-step').textContent = `Stage ${index + 1} of ${circularStages.length}`;
-      document.getElementById('path-tag').textContent = `Stage ${String(index + 1).padStart(2, '0')} · ${data.label}`;
-      document.getElementById('path-title').textContent = data.title;
-      document.getElementById('path-description').textContent = data.description;
-      document.getElementById('path-action').textContent = data.action;
-      document.getElementById('path-value').textContent = data.value;
-      document.getElementById('path-enabler').textContent = data.enabler;
-      document.getElementById('path-garment-label').textContent = data.garment;
-      document.getElementById('path-shirt').dataset.stage = String(index);
-      document.getElementById('path-shirt').setAttribute('aria-label', `Illustration: ${data.garment.toLowerCase()}`);
-    }
-    pathSlider.addEventListener('input', updateCircularPath);
-    const actorChecks = {
-      repair: {
-        tag: "Actor 01 · downstream business", title: "Repair & reuse business",
-        context: "A repairer needs to identify a garment and understand its construction before recommending a repair or resale route.",
-        decision: "Can this item be repaired, and what is the most suitable next use?",
-        data: "Clear material composition, care instructions and relevant repair guidance that can be accessed without specialist software.",
-        test: "Can a small repair business access and use the information at low cost, in the language and format it needs?",
-        risk: "The passport exists, but repairers cannot find or understand the fields they need."
-      },
-      sorter: {
-        tag: "Actor 02 · recovery system", title: "Sorter or recycler",
-        context: "A sorting facility handles high volumes and needs trustworthy product information that helps staff route items safely and efficiently.",
-        decision: "Which reuse, recycling or recovery route is technically suitable for this item?",
-        data: "Verified fibre composition, blends, trims and substances that could affect sorting or recycling, linked to the actual garment.",
-        test: "Are key data fields accurate and verifiable, and can a facility use them at its operating speed?",
-        risk: "Facilities receive incorrect composition data or need manual checks that slow sorting and raise costs."
-      },
-      pro: {
-        tag: "Actor 03 · policy and finance", title: "Producer-responsibility body",
-        context: "A producer-responsibility organisation or regulator needs comparable market data to monitor obligations and shape incentives.",
-        decision: "How should fees or support vary by product design, and are obligations reaching the right actors?",
-        data: "Reliable product counts by model, material information and traceability sufficient to monitor flows and apply transparent criteria.",
-        test: "Does the data enable fair, auditable decisions without rewarding incomplete reporting or penalising actors who lack capacity?",
-        risk: "Fee or compliance decisions rely on missing product counts, inconsistent categories or claims that cannot be checked."
-      },
-      supplier: {
-        tag: "Actor 04 · producing country", title: "Supplier or worker",
-        context: "Data often starts far upstream, where suppliers may face fragmented systems, added reporting costs and limited influence over policy design.",
-        decision: "Can required information be supplied accurately without undermining capacity to meet other worker and production needs?",
-        data: "A clear, proportionate list of required fields, with agreed definitions, secure handling and support for collection and verification.",
-        test: "Who pays for data collection and capacity building, and were producing-country suppliers and workers involved in setting requirements?",
-        risk: "New reporting costs land with suppliers while deadlines, support and worker impacts are left out of policy design."
-      }
+    const parts={
+      'west-arch':{title:'Existing west arch',sub:'Van Brienenoordbrug · steel arch · the project plan describes renovation and a second use.',pill:'Public plan found',pillClass:'',stats:[['1990','year built · source-backed'],['~3,000 t','steel planned for reuse · estimate']],facts:[['Next use','Planned to replace the east arch'],['Movement','Water transport to Duivelseiland'],['Condition','Current arch-specific record not found publicly'],['Repair scope','Part-level scope not found publicly']]},
+      'east-arch':{title:'East arch position',sub:'Receiving position in the project plan · a passport would link the outgoing arch and the reused west arch.',pill:'Plan context',pillClass:'',stats:[['2032','planned installation'],['1 arch','planned for replacement']],facts:[['Incoming asset','Renovated existing west arch'],['Timing','Summer 2032 · planned'],['Interface data','Connection / acceptance record needed'],['Condition','Project-specific receiving checks not shown here']]},
+      deck:{title:'Bridge deck',sub:'Example asset element · public sources reviewed do not provide a deck component inventory for this demo.',pill:'Example schema',pillClass:'demo',stats:[['—','no public part record'],['4 links','proposed data groups']],facts:[['Identity','Element ID and location would be needed'],['Product data','Link applicable product declarations'],['Maintenance','Inspection and repair history'],['Reuse status','Not assessed in this demo']]},
+      support:{title:'Bridge supports',sub:'Example asset element · selected to show how a passport could organize evidence, not a verified part-level record.',pill:'Example schema',pillClass:'demo',stats:[['—','no public part record'],['4 links','proposed data groups']],facts:[['Identity','Support ID and position would be needed'],['Product data','Link applicable product declarations'],['Condition','Inspection and repair history'],['Reuse status','Not assessed in this demo']]}
     };
-    const actorButtons = [...document.querySelectorAll('.actor-choice')];
-    function activateActor(key) {
-      const data = actorChecks[key];
-      actorButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.actor === key)));
-      document.getElementById('stress-tag').textContent = data.tag;
-      document.getElementById('stress-actor-title').textContent = data.title;
-      document.getElementById('stress-context').textContent = data.context;
-      document.getElementById('stress-decision').textContent = data.decision;
-      document.getElementById('stress-data').textContent = data.data;
-      document.getElementById('stress-test-question').textContent = data.test;
-      document.getElementById('stress-risk').textContent = data.risk;
+    const layers={
+      asset:{title:'Bridge record',lede:'The asset-level record answers: what is this part, where has it been, and what has happened to it?',items:[['Asset and part IDs','Stable link from bridge → element → component'],['Location and role','Position in the bridge and function'],['Lifecycle events','Installed, inspected, repaired, moved or removed'],['Source and date','Who supplied the value, and when was it checked']],note:'For the selected arch, the public plan confirms the intended reuse route. A current condition record and detailed repair history are not available in the public sources reviewed.'},
+      product:{title:'Product DPP',lede:'A construction-product DPP carries product information under EU rules. The bridge passport can link to it where a relevant product passport exists.',items:[['Product identity','Manufacturer, product type and unique identifier'],['Performance + conformity','Declaration and technical documentation'],['Safety + use','Product instructions and safety information'],['Connected information','Link product records to BIM and asset records']],note:'These are regulatory product fields at a high level. The specific construction-product passport system and product-family timing are still being set through EU implementation. The record shown here is a concept, not a compliant DPP.'},
+      reuse:{title:'Reuse evidence',lede:'The reuse check adds project-life information that a manufacturer product record may not contain.',items:[['Condition at release','Inspection / tests tied to component ID'],['What changed','Repair, replacement and removed-material record'],['Fit for next use','Receiving asset requirements and engineering decision'],['Where it went','Storage, reinstallation, reuse, recovery or disposal']],note:'A passport organizes evidence for the responsible engineer and asset owner. It does not certify that a bridge part is safe or suitable for another use.'}
+    };
+    function renderPart(key){const p=parts[key];document.getElementById('assetTitle').textContent=p.title;document.getElementById('assetSub').textContent=p.sub;const pill=document.getElementById('statusPill');pill.className='pill '+p.pillClass;pill.textContent=p.pill;document.getElementById('assetStats').innerHTML=p.stats.map(x=>`<div class="stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');document.getElementById('factsList').innerHTML=p.facts.map(x=>`<div class="fact"><strong>${x[0]}</strong><span>${x[1]}</span></div>`).join('');document.querySelectorAll('.selectable,.pick-btn').forEach(el=>{const active=el.dataset.part===key;el.classList.toggle('selected',active);el.setAttribute('aria-pressed',String(active));});}
+    function renderLayer(key){const x=layers[key];document.getElementById('recordTitle').textContent=x.title;document.getElementById('recordBody').innerHTML=`<p class="record-lede">${x.lede}</p><div class="record-items">${x.items.map(i=>`<div class="record-item"><b>${i[0]}</b><span>${i[1]}</span></div>`).join('')}</div><div class="record-note">${x.note}</div>`;document.querySelectorAll('.layer').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.layer===key)));}
+    const routeData={
+      whole:{title:'Reuse the whole arch',label:'Current public plan',text:'Renovate the existing west arch and install it in the east position. This is the project plan, not a scenario estimate.',checks:['Condition and repair scope','Transport readiness','Receiving-position acceptance'],note:'A published plan is not proof of completed reuse. Follow project updates for the final outcome.'},
+      parts:{title:'Estimate component reuse',label:'Alternative scenario · historical mass baseline',text:'Test how much of the old east arch could be reused as components, then account for the share that finds an accepting project.',checks:['Identify reusable components','Confirm condition and connections','Find and approve a receiving project'],note:'The 2023 listing is a historical opportunity, not a current offer. This estimate does not test engineering suitability.'},
+      materials:{title:'Estimate material recovery',label:'Alternative scenario · historical mass baseline',text:'Estimate how much mass could enter steel recovery and how much recovered output remains after processing losses.',checks:['Verify steel mass and coatings','Confirm dismantling and recovery route','Measure actual recovered output'],note:'Recovered output is a scenario estimate. It is not verified recycled content, a carbon saving, or a confirmed destination.'}
+    };
+    const EAST_ARCH_BASELINE_T=6300;
+    const fmtT=n=>(Math.abs(n-Math.round(n))<1e-9?Math.round(n).toLocaleString('en-US'):n.toLocaleString('en-US',{maximumFractionDigits:1}))+' t';
+    function renderMassModel(key){
+      const box=document.getElementById('massModel');
+      if(key==='whole'){box.hidden=true;box.innerHTML='';return;}
+      box.hidden=false;
+      if(key==='parts'){
+        box.innerHTML='<div class="mass-head"><div><p class="eyebrow">Component reuse scenario</p><h3>How much could find a second use?</h3><p>Start with the historical 6,300 t mass. Adjust the two assumptions to test a case.</p></div><div class="mass-baseline"><b>6,300 t</b><span>2023 listed mass</span></div></div>'+
+        '<div class="mass-controls"><div class="mass-control"><label for="componentShare">Share identified as reusable components <output id="componentShareOut">10%</output></label><input id="componentShare" type="range" min="0" max="100" step="1" value="10"><small>Example assumption · not measured</small></div><div class="mass-control"><label for="matchShare">Share accepted by a receiving project <output id="matchShareOut">50%</output></label><input id="matchShare" type="range" min="0" max="100" step="1" value="50"><small>Example assumption · requires a confirmed match</small></div></div>'+
+        '<div class="mass-results"><div class="mass-result"><b id="candidateMassOut">630 t</b><span>candidate component mass</span></div><div class="mass-result highlight"><b id="reuseMassOut">315 t</b><span>scenario mass reused</span></div><div class="mass-result"><b id="unmatchedMassOut">315 t</b><span>candidate mass without a match</span></div><div class="mass-result"><b id="outsideMassOut">5,670 t</b><span>outside this component screen</span></div></div>'+
+        '<div class="mass-bar" aria-label="Component reuse scenario"><span class="reuse-seg" id="reuseSeg"></span><span class="recovery-seg" id="unmatchedSeg"></span><span class="unallocated-seg" id="outsideSeg"></span></div>'+
+        '<div class="mass-legend"><span><i style="background:var(--teal)"></i>Matched for reuse</span><span><i style="background:#9ec77b"></i>Candidate, no match</span><span><i style="background:#e8c16f"></i>Outside this screen</span></div>';
+        const update=()=>{const c=+document.getElementById('componentShare').value,m=+document.getElementById('matchShare').value,candidate=EAST_ARCH_BASELINE_T*c/100,reused=candidate*m/100,unmatched=candidate-reused,outside=EAST_ARCH_BASELINE_T-candidate;document.getElementById('componentShareOut').textContent=c+'%';document.getElementById('matchShareOut').textContent=m+'%';document.getElementById('candidateMassOut').textContent=fmtT(candidate);document.getElementById('reuseMassOut').textContent=fmtT(reused);document.getElementById('unmatchedMassOut').textContent=fmtT(unmatched);document.getElementById('outsideMassOut').textContent=fmtT(outside);document.getElementById('reuseSeg').style.width=(reused/EAST_ARCH_BASELINE_T*100)+'%';document.getElementById('unmatchedSeg').style.width=(unmatched/EAST_ARCH_BASELINE_T*100)+'%';document.getElementById('outsideSeg').style.width=(outside/EAST_ARCH_BASELINE_T*100)+'%';};
+        document.getElementById('componentShare').addEventListener('input',update);document.getElementById('matchShare').addEventListener('input',update);update();
+      }else{
+        box.innerHTML='<div class="mass-head"><div><p class="eyebrow">Material recovery scenario</p><h3>How much material could be recovered?</h3><p>Estimate the mass sent to recovery and the output after processing. Adjust both assumptions.</p></div><div class="mass-baseline"><b>6,300 t</b><span>2023 listed mass</span></div></div>'+
+        '<div class="mass-controls"><div class="mass-control"><label for="recoveryShare">Share sent to material recovery <output id="recoveryShareOut">90%</output></label><input id="recoveryShare" type="range" min="0" max="100" step="1" value="90"><small>Example assumption · route not confirmed</small></div><div class="mass-control"><label for="recoveryYield">Recovery output from that mass <output id="recoveryYieldOut">95%</output></label><input id="recoveryYield" type="range" min="0" max="100" step="1" value="95"><small>Example process yield · replace with supplier data</small></div></div>'+
+        '<div class="mass-results recovery-results"><div class="mass-result"><b id="sentMassOut">5,670 t</b><span>mass sent to recovery</span></div><div class="mass-result highlight"><b id="recoveredMassOut">5,386.5 t</b><span>scenario recovered output</span></div><div class="mass-result"><b id="lossMassOut">283.5 t</b><span>processing loss in scenario</span></div><div class="mass-result"><b id="notRoutedMassOut">630 t</b><span>mass not sent to recovery</span></div></div>'+
+        '<div class="mass-bar" aria-label="Material recovery scenario"><span class="reuse-seg" id="recoveredSeg"></span><span class="recovery-seg" id="lossSeg"></span><span class="unallocated-seg" id="notRoutedSeg"></span></div>'+
+        '<div class="mass-legend"><span><i style="background:var(--teal)"></i>Recovered output</span><span><i style="background:#9ec77b"></i>Process loss</span><span><i style="background:#e8c16f"></i>Not routed</span></div>';
+        const update=()=>{const routed=+document.getElementById('recoveryShare').value,yieldPct=+document.getElementById('recoveryYield').value,sent=EAST_ARCH_BASELINE_T*routed/100,recovered=sent*yieldPct/100,loss=sent-recovered,notRouted=EAST_ARCH_BASELINE_T-sent;document.getElementById('recoveryShareOut').textContent=routed+'%';document.getElementById('recoveryYieldOut').textContent=yieldPct+'%';document.getElementById('sentMassOut').textContent=fmtT(sent);document.getElementById('recoveredMassOut').textContent=fmtT(recovered);document.getElementById('lossMassOut').textContent=fmtT(loss);document.getElementById('notRoutedMassOut').textContent=fmtT(notRouted);document.getElementById('recoveredSeg').style.width=(recovered/EAST_ARCH_BASELINE_T*100)+'%';document.getElementById('lossSeg').style.width=(loss/EAST_ARCH_BASELINE_T*100)+'%';document.getElementById('notRoutedSeg').style.width=(notRouted/EAST_ARCH_BASELINE_T*100)+'%';};
+        document.getElementById('recoveryShare').addEventListener('input',update);document.getElementById('recoveryYield').addEventListener('input',update);update();
+      }
     }
-    actorButtons.forEach(button => button.addEventListener('click', () => activateActor(button.dataset.actor)));
-    updateCircularPath();
+    function renderRoute(key){
+      const r=routeData[key];
+      document.getElementById('routeResult').innerHTML='<div><span class="tiny-label">'+r.label+'</span><h3>'+r.title+'</h3><p>'+r.text+'</p></div><details class="next-checks"><summary>What needs confirming?</summary><ul>'+r.checks.map(c=>'<li>'+c+'</li>').join('')+'</ul><p>'+r.note+'</p></details>';
+      document.querySelectorAll('.route').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.route===key)));
+      renderMassModel(key);
+    }
+    document.querySelectorAll('.nav a[href="#passport-rules"]').forEach(a=>a.addEventListener('click',()=>{document.getElementById('passport-rules').open=true;}));
+    document.querySelectorAll('.selectable').forEach(el=>{el.addEventListener('click',()=>renderPart(el.dataset.part));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();renderPart(el.dataset.part);}});});
+    document.querySelectorAll('.pick-btn').forEach(el=>el.addEventListener('click',()=>renderPart(el.dataset.part)));
+    document.querySelectorAll('.layer').forEach(b=>b.addEventListener('click',()=>renderLayer(b.dataset.layer)));
+    document.querySelectorAll('.route').forEach(b=>b.addEventListener('click',()=>renderRoute(b.dataset.route)));
+    renderPart('west-arch');renderLayer('asset');renderRoute('whole');
   </script>
 </body>
 </html>
